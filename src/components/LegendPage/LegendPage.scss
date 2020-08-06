@@ -1,0 +1,38 @@
+.legend-back {
+  float: right;
+  margin-right: 30px;
+
+  .legend-item {
+    width: 150px;
+    margin-bottom: 20px;
+
+    .legend-icon {
+      display: inline-block;
+      width: 23px;
+      height: 23px;
+      background-color: red;
+      float: left;
+      margin-top: 5px;
+    }
+
+    .here{
+      border-radius: 60px;
+    }
+
+    .extinguisher {
+      background-color: blue;
+    }
+
+    .legend-text {
+      margin-left: 40px;
+
+      .legend-text-KR {
+        font-size: 13px;
+        font-weight: bold;
+      }
+      .legend-text-EN {
+        font-size: 11px;
+      }
+    }
+  }
+}

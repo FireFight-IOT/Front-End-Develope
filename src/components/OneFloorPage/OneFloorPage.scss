@@ -1,0 +1,75 @@
+.onefloor-back {
+  border: 5px solid black;
+  width: 1072px;
+  height: 360px;
+  margin: none;
+  background-color: gray;
+
+  .right-stair, .left-stair {
+    float: left;
+
+    img {
+      border: 3px solid black;
+      width: 200px;
+      height: 265px;
+      background-color: white;
+      transform: rotate(180deg);
+    }
+  }
+  .right-stair {
+    float: right;
+  }
+
+  .room {
+    width: 214px;
+    height: 270px;
+    float: left;
+    border: 3px solid black;
+    background-color: white;
+
+    img {
+      width: 50px;
+      height: 70px;
+      position: relative;
+      top: 202px;
+      left: 80px;
+    }
+  }
+
+  .left-extinguisher, .right-extinguisher {
+    width: 27px;
+    height: 27px;
+    background-color: blue;
+    position: absolute;
+    top: 338.5px;
+  }
+  .right-extinguisher{
+    left: 1050px;
+  }
+  .onfloor-here {
+    width: 27px;
+    height: 27px;
+    background-color: red;
+    border-radius: 45px;
+    position: absolute;
+    top: 338.5px;
+    left: 150px;
+  }
+  .onfloor-hydrant {
+    width: 27px;
+    height: 27px;
+    background-color: red;
+    position: absolute;
+    top: 338.5px;
+    left: 800px;
+  }
+  .onfloor-enter {
+    width: 100px;
+    height: 5px;
+    background-color: gray;
+    position: absolute;
+    top: 365px;
+    left: 500px;
+
+  }
+}

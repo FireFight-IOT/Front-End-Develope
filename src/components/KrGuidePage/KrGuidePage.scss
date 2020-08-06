@@ -1,0 +1,57 @@
+@media all and (min-width:1024px){
+  .krguide-back {
+    .krguide-item{
+      margin-bottom: 20px;
+      font-size: 13px;
+
+      .krguide-title{
+        float: left;
+        margin-right: 20px;
+        color: #0E540D;
+        font-weight: bold;
+      }
+
+      .krguide-text {
+        white-space: pre;
+      }
+    }
+  }
+}
+
+@media all and (min-width:768px) and (max-width:1023px) {
+  .krguide-back {
+    .krguide-item{
+      margin-bottom: 20px;
+      font-size: 13px;
+
+      .krguide-title{
+        margin-right: 20px;
+        color: #0E540D;
+        font-weight: bold;
+      }
+
+      .krguide-text {
+        white-space: pre;
+      }
+    }
+  }
+}
+
+@media all and (max-width:767px) {
+  .krguide-back {
+    .krguide-item {
+      margin-bottom: 20px;
+      font-size: 13px;
+
+      .krguide-title {
+        margin-right: 20px;
+        color: #0E540D;
+        font-weight: bold;
+      }
+
+      .krguide-text {
+        white-space: pre;
+      }
+    }
+  }
+}
