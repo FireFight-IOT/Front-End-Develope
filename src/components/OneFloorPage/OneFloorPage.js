@@ -1,80 +1,60 @@
-import React, {Component} from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
 import styles from './OneFloorPage.scss';
 import classNames from 'classnames/bind';
 import stair from './../../images/stair.png';
 import door from './../../images/door.png';
 import stair_nega from './../../images/stair_negative.png';
 import door_nega from './../../images/door_negative.png';
+import { useSelector, useDispatch } from 'react-redux';
+import { getFire } from './../../actions';
 
 const cx = classNames.bind(styles);
-const axios = require('axios');
 
-class OneFloorPage extends Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      leftStair: false,
-      rightStair: false,
-      oneRoom: false,
-      twoRoom: false,
-      threeRoom: false,
-    };
+const OneFloorPage = ({ day }) =>{
+  const [leftStair, setLeftStair] = useState(false),
+        [rightStair, setRightStair] = useState(false),
+        [oneRoom, setOneRoom] = useState(false),
+        [twoRoom, setTwoRoom] = useState(false),
+        [threeRoom, setThreeRoom] = useState(false);
 
-    this.getFloorFire = this.getFloorFire.bind(this);
-  }
+  const fire = useSelector(state => state.floor.fire)
 
-  getFloorFire() {
-    axios.post("http://localhost:8080/api/view/fire", {
-      floor: 1,
-    })
-    .then((response) => {
-      console.log(response.data);
-      this.setState({
-        leftStair: response.data.left,
-        rightStair: response.data.right,
-        oneRoom: response.data.one,
-        twoRoom: response.data.two,
-        threeRoom: response.data.three,
-      })
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  }
+  const dispatch = useDispatch();
 
-  componentDidMount() {
-    // setInterval(() => {
-      this.getFloorFire();
-    // }, 100)
-  }
+  useEffect(() => {
+    getFire(1)(dispatch);
+  }, [])
 
-  render(){
-    const { day } = this.props;
-
-    let oneRoomColor = this.state.oneRoom ? "red" : day ? "white" : "black";
-    let twoRoomColor = this.state.twoRoom ? "red" : day ? "white" : "black";
-    let threeRoomColor = this.state.threeRoom ? "red" : day ? "white" : "black";
-    let leftStairColor = this.state.leftStair ? "red" : day ? "white" : "black";
-    let rightStairColor = this.state.rightStair ? "red" : day ? "white" : "black";
-    let lineColor = day ? "black" : "white";
+  setTimeout(() => {
+    setLeftStair(fire[0]);
+    setRightStair(fire[1]);
+    setOneRoom(fire[2]);
+    setTwoRoom(fire[3]);
+    setThreeRoom(fire[4]);
+  }, 100);
 
 
-    return (
-      <div style={{borderColor: lineColor}} className={cx('onefloor-back')}>
-        <div className={cx('left-stair')}><img style={{backgroundColor: leftStairColor, borderColor: lineColor}} src={day ? stair : stair_nega} id="stair1"/></div>
-        <div id="room1" style={{backgroundColor: oneRoomColor, borderColor: lineColor}} className={cx('room')}><img src={day ? door : door_nega}/></div>
-        <div id="room2" style={{backgroundColor: twoRoomColor, borderColor: lineColor}} className={cx('room')}><img src={day ? door : door_nega}/></div>
-        <div id="room3" style={{backgroundColor: threeRoomColor, borderColor: lineColor}} className={cx('room')}><img src={day ? door : door_nega}/></div>
-        <div className={cx('right-stair')}><img style={{backgroundColor: rightStairColor, borderColor: lineColor}} src={day ? stair : stair_nega} id="stair2"/></div>
-        <div className={cx('left-extinguisher')}></div>
-        <div className={cx('onfloor-here')}></div>
-        <div className={cx('onfloor-hydrant')}></div>
-        <div className={cx('right-extinguisher')}></div>
-        <div className={cx('onfloor-enter')}></div>
-      </div>
-    );
-  }
+  let oneRoomColor = oneRoom ? "red" : day ? "white" : "black";
+  let twoRoomColor = twoRoom ? "red" : day ? "white" : "black";
+  let threeRoomColor = threeRoom ? "red" : day ? "white" : "black";
+  let leftStairColor = leftStair ? "red" : day ? "white" : "black";
+  let rightStairColor = rightStair ? "red" : day ? "white" : "black";
+  let lineColor = day ? "black" : "white";
+
+  return (
+    <div style={{borderColor: lineColor}} className={cx('onefloor-back')}>
+      <div className={cx('left-stair')}><img style={{backgroundColor: leftStairColor, borderColor: lineColor}} src={day ? stair : stair_nega} id="stair1"/></div>
+      <div id="room1" style={{backgroundColor: oneRoomColor, borderColor: lineColor}} className={cx('room')}><img src={day ? door : door_nega}/></div>
+      <div id="room2" style={{backgroundColor: twoRoomColor, borderColor: lineColor}} className={cx('room')}><img src={day ? door : door_nega}/></div>
+      <div id="room3" style={{backgroundColor: threeRoomColor, borderColor: lineColor}} className={cx('room')}><img src={day ? door : door_nega}/></div>
+      <div className={cx('right-stair')}><img style={{backgroundColor: rightStairColor, borderColor: lineColor}} src={day ? stair : stair_nega} id="stair2"/></div>
+      <div className={cx('left-extinguisher')}></div>
+      <div className={cx('onfloor-here')}></div>
+      <div className={cx('onfloor-hydrant')}></div>
+      <div className={cx('right-extinguisher')}></div>
+      <div className={cx('onfloor-enter')}></div>
+    </div>
+  );
 }
 
 export default OneFloorPage;
